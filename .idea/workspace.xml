@@ -82,11 +82,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="styles.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="styles.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2027027" vertical-offset="0" max-vertical-offset="630">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
               <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_timeline.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_timeline.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.18584071" vertical-offset="0" max-vertical-offset="565">
+              <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -98,7 +111,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.2222223" vertical-offset="0" max-vertical-offset="930">
+            <state vertical-scroll-proportion="3.8888888" vertical-offset="165" max-vertical-offset="930">
               <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
               <folding />
             </state>
@@ -1114,9 +1127,9 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_timeline.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_tweet.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_timeline.xml" />
       </list>
     </option>
   </component>
@@ -1734,17 +1747,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_timeline.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4" vertical-offset="0" max-vertical-offset="300">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/codepath/apps/restclienttemplate/RestApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="129" max-vertical-offset="465">
@@ -1758,7 +1760,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.2222223" vertical-offset="0" max-vertical-offset="930">
+        <state vertical-scroll-proportion="3.8888888" vertical-offset="165" max-vertical-offset="930">
           <caret line="4" column="22" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
           <folding />
         </state>
@@ -1766,8 +1768,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2027027" vertical-offset="0" max-vertical-offset="630">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
           <caret line="8" column="12" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_timeline.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18584071" vertical-offset="0" max-vertical-offset="565">
+          <caret line="7" column="45" selection-start-line="7" selection-start-column="45" selection-end-line="7" selection-end-column="45" />
           <folding />
         </state>
       </provider>
