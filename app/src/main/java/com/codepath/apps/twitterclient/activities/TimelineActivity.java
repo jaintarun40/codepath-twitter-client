@@ -4,15 +4,47 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.codepath.apps.twitterclient.R;
+import com.codepath.apps.twitterclient.TwitterApplication;
+import com.codepath.apps.twitterclient.adapters.TweetsArrayAdapter;
+import com.codepath.apps.twitterclient.helpers.TwitterClient;
+import com.codepath.apps.twitterclient.models.Tweet;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class TimelineActivity extends ActionBarActivity {
+
+    TwitterClient client = TwitterApplication.getRestClient();
+    TweetsArrayAdapter tweetAdapter;
+    ArrayList<Tweet> tweetsList = new ArrayList<Tweet>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+        ListView lvTimeline = (ListView) findViewById(R.id.lvTimeline);
+        tweetAdapter = new TweetsArrayAdapter(this, tweetsList);
+        lvTimeline.setAdapter(tweetAdapter);
+        populateTimeline();
+    }
+
+    private void populateTimeline() {
+        client.getHomeTimeline(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                tweetsList = Tweet.fromJson(response);
+                tweetAdapter.addAll(tweetsList);
+                tweetAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
 
