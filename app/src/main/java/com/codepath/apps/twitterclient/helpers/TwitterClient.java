@@ -1,4 +1,4 @@
-package com.codepath.apps.twitterclient;
+package com.codepath.apps.twitterclient.helpers;
 
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
