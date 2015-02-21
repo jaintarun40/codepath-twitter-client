@@ -71,7 +71,8 @@ public class TimelineActivity extends ActionBarActivity {
 
 //        noinspection SimplifiableIfStatement
         if (id == R.id.action_compose) {
-            return true;
+            Intent i = new Intent(this, ComposeActivity.class);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);
