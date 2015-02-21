@@ -48,7 +48,6 @@
             style="@style/RegularText"
             android:layout_below="@id/tvTweetFullName"
             android:linksClickable="true"
-            android:layout_marginTop="3dp"
             android:text="Tweet tweet tweet! Tweet tweet tweet! Tweet tweet tweet! This is 140 characters of sample text. This is 140 characters of sample text. Meow."
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

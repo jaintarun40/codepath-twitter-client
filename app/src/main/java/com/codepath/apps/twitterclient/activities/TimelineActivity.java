@@ -69,12 +69,24 @@ public class TimelineActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-//        noinspection SimplifiableIfStatement
         if (id == R.id.action_compose) {
             Intent i = new Intent(this, ComposeActivity.class);
-            startActivity(i);
+            startActivityForResult(i, ComposeActivity.REQUEST_CODE);
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == ComposeActivity.REQUEST_CODE) {
+            String tweetBody = data.getStringExtra("body");
+            client.postUpdate(tweetBody, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    super.onSuccess(statusCode, headers, response);
+                }
+            });
+        }
     }
 }

@@ -1,18 +1,41 @@
 package com.codepath.apps.twitterclient.activities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.codepath.apps.twitterclient.R;
 
 public class ComposeActivity extends ActionBarActivity {
 
+    public static int REQUEST_CODE = 200;
+
+    EditText tweetText;
+    Button submit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
+
+        tweetText = (EditText) findViewById(R.id.etNewTweetText);
+        submit = (Button) findViewById(R.id.btnSubmitNewTweet);
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                i.putExtra("body", tweetText.getText().toString());
+                setResult(REQUEST_CODE, i);
+                finish();
+            }
+        });
+
     }
 
 
