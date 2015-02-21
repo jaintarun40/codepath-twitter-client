@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.codepath.apps.twitterclient.R;
 import com.codepath.apps.twitterclient.TwitterApplication;
 import com.codepath.apps.twitterclient.helpers.TwitterClient;
+import com.codepath.apps.twitterclient.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -43,8 +44,9 @@ public class ComposeActivity extends ActionBarActivity {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         // Go back to the timeline
+                        Tweet tweet = Tweet.fromJson(response);
                         Intent i = new Intent();
-                        i.putExtra("body", tweetText.getText().toString());
+                        i.putExtra("tweet", tweet);
                         setResult(REQUEST_CODE, i);
                         finish();
                     }

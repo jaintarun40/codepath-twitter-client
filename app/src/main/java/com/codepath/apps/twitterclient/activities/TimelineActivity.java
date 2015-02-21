@@ -88,17 +88,8 @@ public class TimelineActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == ComposeActivity.REQUEST_CODE) {
-            String tweetText = data.getStringExtra("body");
-            System.out.println("********** " + tweetText);
             // Append this tweet to the top of the feed
-            Tweet tweet = new Tweet();
-            tweet.setBody(tweetText);
-            tweet.setCreatedAt("just now");
-            User user = new User();
-            user.setUserName("Lori Lee");
-            user.setUserScreenName("teekirol");
-            user.setUserProfileImage("https://pbs.twimg.com/profile_images/569240337005047808/sGtTE2wb_400x400.jpeg");
-            tweet.setUser(user);
+            Tweet tweet = (Tweet) data.getParcelableExtra("tweet");
             tweetAdapter.insert(tweet, 0);
             tweetAdapter.notifyDataSetChanged();
         }

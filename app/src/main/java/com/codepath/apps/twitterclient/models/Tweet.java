@@ -1,5 +1,8 @@
 package com.codepath.apps.twitterclient.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.codepath.apps.twitterclient.helpers.TwitterClient;
 
 import org.json.JSONArray;
@@ -8,12 +11,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Tweet {
+public class Tweet implements Parcelable {
 
     private int id;
     private String body;
     private String createdAt;
     private int retweetCount;
+
+    public Tweet() {
+
+    }
 
     public User getUser() {
         return user;
@@ -87,5 +94,40 @@ public class Tweet {
         }
         return tweets;
     }
+
+    protected Tweet(Parcel in) {
+        id = in.readInt();
+        body = in.readString();
+        createdAt = in.readString();
+        retweetCount = in.readInt();
+        user = (User) in.readValue(User.class.getClassLoader());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(body);
+        dest.writeString(createdAt);
+        dest.writeInt(retweetCount);
+        dest.writeValue(user);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Tweet> CREATOR = new Parcelable.Creator<Tweet>() {
+        @Override
+        public Tweet createFromParcel(Parcel in) {
+            return new Tweet(in);
+        }
+
+        @Override
+        public Tweet[] newArray(int size) {
+            return new Tweet[size];
+        }
+    };
 
 }
