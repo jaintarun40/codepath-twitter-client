@@ -1,7 +1,9 @@
 package com.codepath.apps.twitterclient.activities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -30,6 +32,11 @@ public class TimelineActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+
+        // Set a ToolBar to replace the ActionBar.
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         ListView lvTimeline = (ListView) findViewById(R.id.lvTimeline);
         tweetAdapter = new TweetsArrayAdapter(this, tweetsList);
         lvTimeline.setAdapter(tweetAdapter);
@@ -62,8 +69,8 @@ public class TimelineActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+//        noinspection SimplifiableIfStatement
+        if (id == R.id.action_compose) {
             return true;
         }
 
