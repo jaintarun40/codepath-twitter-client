@@ -8,8 +8,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.codepath.apps.twitterclient.R;
+import com.codepath.apps.twitterclient.TwitterApplication;
+import com.codepath.apps.twitterclient.helpers.TwitterClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.json.JSONObject;
 
 public class ComposeActivity extends ActionBarActivity {
 
@@ -17,6 +24,8 @@ public class ComposeActivity extends ActionBarActivity {
 
     EditText tweetText;
     Button submit;
+
+    TwitterClient client = TwitterApplication.getRestClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +38,21 @@ public class ComposeActivity extends ActionBarActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent();
-                i.putExtra("body", tweetText.getText().toString());
-                setResult(REQUEST_CODE, i);
-                finish();
+
+                client.postUpdate(tweetText.getText().toString(), new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        // Go back to the timeline
+                        Intent i = new Intent();
+                        i.putExtra("body", tweetText.getText().toString());
+                        setResult(REQUEST_CODE, i);
+                        finish();
+                    }
+
+                    // TODO handle error.
+
+                });
+
             }
         });
 
