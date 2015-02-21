@@ -1,5 +1,7 @@
 package com.codepath.apps.twitterclient.models;
 
+import com.codepath.apps.twitterclient.helpers.TwitterClient;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +42,7 @@ public class Tweet {
     }
 
     public String getCreatedAt() {
-        return createdAt;
+        return TwitterClient.getRelativeTimeAgo(createdAt);
     }
 
     public void setCreatedAt(String createdAt) {
