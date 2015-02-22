@@ -108,7 +108,7 @@ public class TimelineActivity extends ActionBarActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == ComposeActivity.REQUEST_CODE) {
+        if(requestCode == ComposeActivity.REQUEST_CODE && resultCode == ComposeActivity.REQUEST_CODE) {
             // Append this tweet to the top of the feed
             Tweet tweet = (Tweet) data.getParcelableExtra("tweet");
             tweetAdapter.insert(tweet, 0);
