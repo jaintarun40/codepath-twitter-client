@@ -3,6 +3,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
     </style>
 
+    <color name="TwitterBlue">#50a5e6</color>
+
     <style name="BlueBackground">
         <item name="android:background">#50a5e6</item>
         <item name="android:textColor">#ffffff</item>
