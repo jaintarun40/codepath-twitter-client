@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Tweet implements Parcelable {
 
-    private int id;
+    private String id;
     private String body;
     private String createdAt;
     private int retweetCount;
@@ -32,11 +32,11 @@ public class Tweet implements Parcelable {
 
     private User user;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(int String) {
         this.id = id;
     }
 
@@ -67,7 +67,7 @@ public class Tweet implements Parcelable {
     public static Tweet fromJson(JSONObject json) {
         Tweet tweet = new Tweet();
         try {
-            tweet.id = json.getInt("id");
+            tweet.id = json.getString("id_str");
             tweet.body = json.getString("text");
             tweet.createdAt = json.getString("created_at");
             tweet.retweetCount = json.getInt("retweet_count");
@@ -96,7 +96,7 @@ public class Tweet implements Parcelable {
     }
 
     protected Tweet(Parcel in) {
-        id = in.readInt();
+        id = in.readString();
         body = in.readString();
         createdAt = in.readString();
         retweetCount = in.readInt();
@@ -110,7 +110,7 @@ public class Tweet implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
+        dest.writeString(id);
         dest.writeString(body);
         dest.writeString(createdAt);
         dest.writeInt(retweetCount);

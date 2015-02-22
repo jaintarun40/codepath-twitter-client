@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.codepath.apps.twitterclient.R;
 import com.codepath.apps.twitterclient.TwitterApplication;
 import com.codepath.apps.twitterclient.adapters.TweetsArrayAdapter;
+import com.codepath.apps.twitterclient.helpers.EndlessScrollListener;
 import com.codepath.apps.twitterclient.helpers.TwitterClient;
 import com.codepath.apps.twitterclient.models.Tweet;
 import com.codepath.apps.twitterclient.models.User;
@@ -43,21 +44,41 @@ public class TimelineActivity extends ActionBarActivity {
 
         ListView lvTimeline = (ListView) findViewById(R.id.lvTimeline);
         tweetAdapter = new TweetsArrayAdapter(this, new ArrayList<Tweet>());
+
         lvTimeline.setAdapter(tweetAdapter);
+
+        lvTimeline.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                if(tweetAdapter.getCount() > 0) {
+                    Tweet newestTweet = tweetAdapter.getItem(0);
+                    populateTimeline(newestTweet.getId());
+                } else {
+                    populateTimeline(null);
+                }
+            }
+        });
+
         if(isNetworkAvailable()) {
-            populateTimeline();
+            populateTimeline(null);
         } else {
             Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_SHORT);
         }
     }
 
-    private void populateTimeline() {
-        client.getHomeTimeline(new JsonHttpResponseHandler() {
+    private void populateTimeline(String sinceId) {
+        client.getHomeTimeline(null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                ArrayList<Tweet> tweetsList = Tweet.fromJson(response);
-                tweetAdapter.addAll(tweetsList);
+                ArrayList<Tweet> tweets = Tweet.fromJson(response);
+                tweetAdapter.addAll(tweets);
                 tweetAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                System.out.println(errorResponse);
+                super.onFailure(statusCode, headers, throwable, errorResponse);
             }
         });
     }
