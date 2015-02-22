@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
@@ -36,6 +38,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
             viewHolder.tvTweetUsername = (TextView) convertView.findViewById(R.id.tvTweetUsername);
             viewHolder.tvTweetAge = (TextView) convertView.findViewById(R.id.tvTweetAge);
             viewHolder.tvTweetBody = (TextView) convertView.findViewById(R.id.tvTweetBody);
+            viewHolder.tvRetweets = (TextView) convertView.findViewById(R.id.tvRetweetCount);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -44,6 +47,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         Tweet tweet = getItem(position);
         viewHolder.tvTweetAge.setText(tweet.getCreatedAt());
         viewHolder.tvTweetBody.setText(tweet.getBody());
+        viewHolder.tvRetweets.setText(String.valueOf(tweet.getRetweetCount()));
 
         User user = tweet.getUser();
         Picasso.with(getContext()).load(Uri.parse(user.getUserProfileImage())).into(viewHolder.ivAvatar);
@@ -60,5 +64,6 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         TextView tvTweetUsername;
         TextView tvTweetAge;
         TextView tvTweetBody;
+        TextView tvRetweets;
     }
 }
