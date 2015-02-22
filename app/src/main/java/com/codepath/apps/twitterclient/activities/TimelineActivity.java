@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -30,13 +31,15 @@ import java.util.ArrayList;
 
 public class TimelineActivity extends ActionBarActivity {
 
-    TwitterClient client = TwitterApplication.getRestClient();
-    TweetsArrayAdapter tweetAdapter;
+    private TwitterClient client = TwitterApplication.getRestClient();
+    private TweetsArrayAdapter tweetAdapter;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
         // Set a ToolBar to replace the ActionBar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -59,6 +62,13 @@ public class TimelineActivity extends ActionBarActivity {
             }
         });
 
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                populateTimeline(null);
+            }
+        });
+
         if(isNetworkAvailable()) {
             populateTimeline(null);
         } else {
@@ -73,12 +83,14 @@ public class TimelineActivity extends ActionBarActivity {
                 ArrayList<Tweet> tweets = Tweet.fromJson(response);
                 tweetAdapter.addAll(tweets);
                 tweetAdapter.notifyDataSetChanged();
+                swipeContainer.setRefreshing(false);
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 System.out.println(errorResponse);
                 super.onFailure(statusCode, headers, throwable, errorResponse);
+                swipeContainer.setRefreshing(false);
             }
         });
     }
