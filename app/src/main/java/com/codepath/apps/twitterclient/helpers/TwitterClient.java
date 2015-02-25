@@ -40,9 +40,8 @@ public class TwitterClient extends OAuthBaseClient {
     public void getHomeTimeline(String sinceId, AsyncHttpResponseHandler handler) {
         String apiUrl = getApiUrl("statuses/home_timeline.json");
         RequestParams params = new RequestParams();
-        params.put("count", "25");
+        params.put("count", 25);
         params.put("since_id", sinceId);
-        System.out.println("***** since_id " + sinceId);
         client.get(apiUrl, params, handler);
     }
 
@@ -51,6 +50,33 @@ public class TwitterClient extends OAuthBaseClient {
         RequestParams params = new RequestParams();
         params.put("status", tweetBody);
         client.post(apiUrl, params, handler);
+    }
+
+    public void getMentions(String sinceId, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        params.put("since_id", sinceId);
+        params.put("include_rts", 1);
+        client.get(apiUrl, params, handler);
+    }
+
+    public void getCredentials(AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("account/verify_credentials.json");
+        RequestParams params = new RequestParams();
+        params.put("include_entities", "false");
+        params.put("skip_status", 1);
+        client.get(apiUrl, params, handler);
+    }
+
+    public void getUserTimeline(String sinceId, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/user_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("since_id", sinceId);
+        params.put("screen_name", "teekiroleel");
+        params.put("count", 25);
+        params.put("trim_user", 1);
+        client.get(apiUrl, params, handler);
     }
 
     // Got this from https://gist.github.com/nesquena/f786232f5ef72f6e10a7
