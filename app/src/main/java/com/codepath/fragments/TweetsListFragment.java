@@ -84,7 +84,7 @@ public abstract class TweetsListFragment extends Fragment {
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 
-    protected void add(Tweet tweet) {
+    public void add(Tweet tweet) {
         tweetAdapter.insert(tweet, 0);
         tweetAdapter.notifyDataSetChanged();
     }

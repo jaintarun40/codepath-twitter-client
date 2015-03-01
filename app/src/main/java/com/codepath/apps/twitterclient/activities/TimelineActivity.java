@@ -8,9 +8,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import com.codepath.apps.twitterclient.R;
 import com.codepath.apps.twitterclient.models.Tweet;
+import com.codepath.fragments.HomeTimelineFragment;
+import com.codepath.fragments.TweetsListFragment;
 
 public class TimelineActivity extends ActionBarActivity {
 
+    HomeTimelineFragment homeTimelineFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,10 @@ public class TimelineActivity extends ActionBarActivity {
         // Set a ToolBar to replace the ActionBar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        if(savedInstanceState == null) {
+            homeTimelineFragment = (HomeTimelineFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_tweets);
+        }
 
     }
 
@@ -51,6 +58,7 @@ public class TimelineActivity extends ActionBarActivity {
             // Append this tweet to the top of the feed
             Tweet tweet = (Tweet) data.getParcelableExtra("tweet");
             // TODO pass this onto the fragment
+            homeTimelineFragment.add(tweet);
         }
     }
 

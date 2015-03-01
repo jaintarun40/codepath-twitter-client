@@ -16,7 +16,7 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="com.codepath.fragments.MentionsTimelineFragment"
+        android:name="com.codepath.fragments.HomeTimelineFragment"
         android:id="@+id/fragment_tweets"
         tools:layout="@layout/fragment_tweets_list" />
 
