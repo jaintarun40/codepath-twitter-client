@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.codepath.apps.twitterclient.R;
 import com.codepath.apps.twitterclient.adapters.TweetsArrayAdapter;
@@ -18,19 +19,26 @@ import com.codepath.apps.twitterclient.models.Tweet;
 
 import java.util.ArrayList;
 
-public abstract class TweetsList extends Fragment {
+public abstract class TweetsListFragment extends Fragment {
 
     private TweetsArrayAdapter tweetAdapter;
     private SwipeRefreshLayout swipeContainer;
 
 
-    public TweetsList() {
+    public TweetsListFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        if(isNetworkAvailable()) {
+            populateTimeline(null);
+        } else {
+            Toast.makeText(getActivity().getApplicationContext(), "No internet connection", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public abstract void populateTimeline(String sinceId);

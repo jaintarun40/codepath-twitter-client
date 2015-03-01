@@ -1,8 +1,5 @@
 package com.codepath.fragments;
 
-import android.os.Bundle;
-import android.widget.Toast;
-
 import com.codepath.apps.twitterclient.TwitterApplication;
 import com.codepath.apps.twitterclient.helpers.TwitterClient;
 import com.codepath.apps.twitterclient.models.Tweet;
@@ -14,19 +11,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MentionsTimelineFragment extends TweetsList {
+public class MentionsTimelineFragment extends TweetsListFragment {
 
     private TwitterClient client = TwitterApplication.getRestClient();
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if(isNetworkAvailable()) {
-            populateTimeline(null);
-        } else {
-            Toast.makeText(getActivity().getApplicationContext(), "No internet connection", Toast.LENGTH_SHORT);
-        }
-    }
 
     public void populateTimeline(String sinceId) {
         client.getMentions(null, new JsonHttpResponseHandler() {
