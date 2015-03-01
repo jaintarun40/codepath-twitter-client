@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,17 +13,11 @@
         style="@style/BlueBackground">
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:id="@+id/swipeContainer">
-        <ListView
-            android:id="@+id/lvTimeline"
+        <fragment
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </ListView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+            android:layout_height="wrap_content"
+            android:name="com.codepath.fragments.TweetsList"
+            android:id="@+id/fragment"
+            tools:layout="@layout/fragment_tweets_list" />
 
 </LinearLayout>
