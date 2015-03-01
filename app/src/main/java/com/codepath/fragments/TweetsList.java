@@ -1,5 +1,8 @@
 package com.codepath.fragments;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,23 +18,77 @@ import com.codepath.apps.twitterclient.models.Tweet;
 
 import java.util.ArrayList;
 
-public class TweetsList extends Fragment {
+public abstract class TweetsList extends Fragment {
 
     private TweetsArrayAdapter tweetAdapter;
     private SwipeRefreshLayout swipeContainer;
+
 
     public TweetsList() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    public abstract void populateTimeline(String sinceId);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tweets_list, container, false);
+        View v = inflater.inflate(R.layout.fragment_tweets_list, container, false);
 
+        swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
+
+        ListView lvTimeline = (ListView) v.findViewById(R.id.lvTimeline);
+        tweetAdapter = new TweetsArrayAdapter(getActivity(), new ArrayList<Tweet>());
+
+        lvTimeline.setAdapter(tweetAdapter);
+
+        lvTimeline.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                if(tweetAdapter.getCount() > 0) {
+                    Tweet newestTweet = tweetAdapter.getItem(0);
+                    populateTimeline(newestTweet.getId());
+                } else {
+                    populateTimeline(null);
+                }
+            }
+        });
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                populateTimeline(null);
+            }
+        });
+
+        return v;
     }
 
+    protected Boolean isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = cm.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
+    }
+
+    protected void add(Tweet tweet) {
+        tweetAdapter.insert(tweet, 0);
+        tweetAdapter.notifyDataSetChanged();
+    }
+
+    protected void addAll(ArrayList<Tweet> tweets) {
+        tweetAdapter.addAll(tweets);
+        tweetAdapter.notifyDataSetChanged();
+        swipeContainer.setRefreshing(false);
+    }
+
+    protected void stopRefreshing() {
+        swipeContainer.setRefreshing(false);
+    }
 
 }

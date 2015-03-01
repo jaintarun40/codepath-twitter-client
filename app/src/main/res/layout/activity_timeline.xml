@@ -13,11 +13,11 @@
         style="@style/BlueBackground">
     </android.support.v7.widget.Toolbar>
 
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:name="com.codepath.fragments.TweetsList"
-            android:id="@+id/fragment"
-            tools:layout="@layout/fragment_tweets_list" />
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.codepath.fragments.MentionsTimelineFragment"
+        android:id="@+id/fragment_tweets"
+        tools:layout="@layout/fragment_tweets_list" />
 
 </LinearLayout>
