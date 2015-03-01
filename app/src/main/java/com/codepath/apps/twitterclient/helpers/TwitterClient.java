@@ -1,13 +1,17 @@
 package com.codepath.apps.twitterclient.helpers;
 
+import org.apache.http.Header;
+import org.json.JSONObject;
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
 import android.content.Context;
 import android.text.format.DateUtils;
 
+import com.codepath.apps.twitterclient.models.User;
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import java.text.ParseException;
@@ -29,8 +33,8 @@ import java.util.Locale;
 public class TwitterClient extends OAuthBaseClient {
 	public static final Class<? extends Api> REST_API_CLASS = TwitterApi.class; // Change this
 	public static final String REST_URL = "https://api.twitter.com/1.1/"; // Change this, base API URL
-	public static final String REST_CONSUMER_KEY = "qaJ75NFwgjrC0hC4BvtzhrSK7";
-	public static final String REST_CONSUMER_SECRET = "EOLyzQWriusrEr1NXYsSos9EwFwyaGHDNEsU4fB9AooWYJHWN3";
+	public static final String REST_CONSUMER_KEY = "sE24oFex8GXsnYzuhwksDjV0o";
+	public static final String REST_CONSUMER_SECRET = "3TCPmMRqpCpzbixTkTyXf0jL0aavAv1Ewy1HAWNZYa8JYHUB8Z";
 	public static final String REST_CALLBACK_URL = "oauth://codepathtweets";
 
 	public TwitterClient(Context context) {
@@ -58,6 +62,7 @@ public class TwitterClient extends OAuthBaseClient {
         params.put("count", 25);
         params.put("since_id", sinceId);
         params.put("include_rts", 1);
+        System.out.println(params.toString());
         client.get(apiUrl, params, handler);
     }
 
@@ -69,11 +74,11 @@ public class TwitterClient extends OAuthBaseClient {
         client.get(apiUrl, params, handler);
     }
 
-    public void getUserTimeline(String sinceId, AsyncHttpResponseHandler handler) {
+    public void getUserTimeline(String username, String sinceId, AsyncHttpResponseHandler handler) {
         String apiUrl = getApiUrl("statuses/user_timeline.json");
         RequestParams params = new RequestParams();
         params.put("since_id", sinceId);
-        params.put("screen_name", "teekiroleel");
+        params.put("screen_name", username);
         params.put("count", 25);
         params.put("trim_user", 1);
         client.get(apiUrl, params, handler);

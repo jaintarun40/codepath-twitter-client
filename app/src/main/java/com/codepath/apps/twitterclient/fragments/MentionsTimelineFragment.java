@@ -1,4 +1,4 @@
-package com.codepath.fragments;
+package com.codepath.apps.twitterclient.fragments;
 
 import com.codepath.apps.twitterclient.TwitterApplication;
 import com.codepath.apps.twitterclient.helpers.TwitterClient;
@@ -8,24 +8,26 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.apache.http.Header;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
-public class HomeTimelineFragment extends TweetsListFragment {
+public class MentionsTimelineFragment extends TweetsListFragment {
 
     private TwitterClient client = TwitterApplication.getRestClient();
 
     public void populateTimeline(String sinceId) {
-        client.getHomeTimeline(null, new JsonHttpResponseHandler() {
+        client.getMentions(sinceId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                System.out.println(response);
                 ArrayList<Tweet> tweets = Tweet.fromJson(response);
                 addAll(tweets);
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                System.out.println("mentions timeline failed");
                 System.out.println(errorResponse);
-                super.onFailure(statusCode, headers, throwable, errorResponse);
                 stopRefreshing();
             }
         });

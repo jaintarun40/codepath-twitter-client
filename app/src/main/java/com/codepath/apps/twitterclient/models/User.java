@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 public class User implements Parcelable {
 
-    private int id;
+    private String id;
     private String userName;
     private String userProfileImage;
     private String userScreenName;
@@ -17,11 +17,11 @@ public class User implements Parcelable {
 
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -52,7 +52,7 @@ public class User implements Parcelable {
     public static User fromJson(JSONObject json) {
         User user = new User();
         try {
-            user.id = json.getInt("id");
+            user.id = json.getString("id_str");
             user.userName = json.getString("name");
             user.userProfileImage = json.getString("profile_image_url");
             user.userScreenName = json.getString("screen_name");
@@ -63,7 +63,7 @@ public class User implements Parcelable {
     }
 
     protected User(Parcel in) {
-        id = in.readInt();
+        id = in.readString();
         userName = in.readString();
         userProfileImage = in.readString();
         userScreenName = in.readString();
@@ -76,7 +76,7 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
+        dest.writeString(id);
         dest.writeString(userName);
         dest.writeString(userProfileImage);
         dest.writeString(userScreenName);

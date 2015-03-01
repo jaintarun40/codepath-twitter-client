@@ -1,6 +1,8 @@
 package com.codepath.apps.twitterclient;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.codepath.apps.twitterclient.helpers.TwitterClient;
 
@@ -16,7 +18,7 @@ public class TwitterApplication extends com.activeandroid.app.Application {
 	public void onCreate() {
 		super.onCreate();
 		TwitterApplication.context = this;
-	}
+    }
 
 	public static TwitterClient getRestClient() {
 		return (TwitterClient) TwitterClient.getInstance(TwitterClient.class, TwitterApplication.context);
