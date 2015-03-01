@@ -18,8 +18,11 @@
         app:pstsShouldExpand="true"
         app:pstsTextAllCaps="false"
         app:pstsIndicatorColor="@color/TwitterBlue"
+        android:textSize="14sp"
+        android:background="@android:color/white"
+        android:textColor="@color/TwitterBlue"
         android:layout_width="match_parent"
-        android:layout_height="48dp">
+        android:layout_height="50dp">
     </com.astuetz.PagerSlidingTabStrip>
 
     <android.support.v4.view.ViewPager

@@ -32,6 +32,9 @@ public class TimelineActivity extends ActionBarActivity {
         // Set a ToolBar to replace the ActionBar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_logo);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         ViewPager vp = (ViewPager) findViewById(R.id.viewpager);
         vp.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager()));
@@ -78,7 +81,7 @@ public class TimelineActivity extends ActionBarActivity {
     // Returns order of the fragments in the view pager
     public class TweetsPagerAdapter extends FragmentPagerAdapter {
 
-        private String tabTitles[] = { "Home", "Mentions", "Profile" };
+        private String tabTitles[] = { "Home", "@ Mentions", "Profile" };
 
         public TweetsPagerAdapter(FragmentManager fm) {
             super(fm);
