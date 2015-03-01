@@ -4,10 +4,15 @@
     </style>
 
     <color name="TwitterBlue">#50a5e6</color>
+    <color name="white">#ffffff</color>
 
     <style name="BlueBackground">
         <item name="android:background">@color/TwitterBlue</item>
-        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="WhiteBackground">
+        <item name="android:background">@color/white</item>
     </style>
 
     <style name="RegularText">

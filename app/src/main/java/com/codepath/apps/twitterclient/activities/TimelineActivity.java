@@ -66,10 +66,16 @@ public class TimelineActivity extends ActionBarActivity {
             startActivityForResult(i, ComposeActivity.REQUEST_CODE);
         }
 
+        if(id == R.id.action_profile) {
+            Intent i = new Intent(this, ProfileActivity.class);
+            startActivity(i);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
 //    @Override
+    // TODO Figure this out
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        if(requestCode == ComposeActivity.REQUEST_CODE && resultCode == ComposeActivity.REQUEST_CODE) {
 //            // Append this tweet to the top of the feed
@@ -81,7 +87,7 @@ public class TimelineActivity extends ActionBarActivity {
     // Returns order of the fragments in the view pager
     public class TweetsPagerAdapter extends FragmentPagerAdapter {
 
-        private String tabTitles[] = { "Home", "@ Mentions", "Profile" };
+        private String tabTitles[] = { "Home", "@ Mentions" };
 
         public TweetsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -98,8 +104,6 @@ public class TimelineActivity extends ActionBarActivity {
                 return new HomeTimelineFragment();
             } else if (position == 1) {
                 return new MentionsTimelineFragment();
-            } else if (position == 2) {
-                return new UserTimelineFragment();
             } else {
                 return null;
             }
