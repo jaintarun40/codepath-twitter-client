@@ -2,7 +2,7 @@
 
 This is a Twitter client for Android
 
-Week 3 Completed user stories:
+## Week 3 Completed user stories:
 
 * [x] Required: User can sign in to Twitter using OAuth login
 * [x] Required: User can view the tweets from their home timeline
@@ -21,7 +21,7 @@ Walkthrough of all week 3 user stories:
 
 ![Video walkthrough](http://i.imgur.com/E2aRXF5.gif)
 
-Week 4 Completed user stories:
+## Week 4 Completed user stories:
 
 * [x] Required: User can switch between Timeline and Mention views using tabs
 * [x] Required: User can navigate to view their own profile. User can see picture, tagline, # of followers, # of following, and tweets on their profile.
