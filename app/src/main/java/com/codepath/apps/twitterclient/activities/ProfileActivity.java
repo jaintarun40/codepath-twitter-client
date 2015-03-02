@@ -38,6 +38,7 @@ public class ProfileActivity extends ActionBarActivity {
     TextView tweetCount;
     TextView followerCount;
     TextView followingCount;
+    TextView tagline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class ProfileActivity extends ActionBarActivity {
         tweetCount = (TextView) findViewById(R.id.tvProfileTweetCount);
         followerCount = (TextView) findViewById(R.id.tvProfileFollowerCount);
         followingCount = (TextView) findViewById(R.id.tvProfileFollowingCount);
+        tagline = (TextView) findViewById(R.id.tvTagline);
 
         populateCredentials(username);
 
@@ -87,6 +89,7 @@ public class ProfileActivity extends ActionBarActivity {
 
                 String fullname = response.getString("name");
                 String screenName = response.getString("screen_name");
+                String desc = response.getString("description");
 
                 String profileImage = response.getString("profile_image_url");
                 String bgImage = response.optString("profile_background_image_url");
@@ -97,6 +100,7 @@ public class ProfileActivity extends ActionBarActivity {
 
                 name.setText(fullname);
                 userName.setText("@" + screenName);
+                tagline.setText(desc);
 
                 Picasso.with(getApplicationContext()).load(Uri.parse(profileImage)).into(avatar);
                 Picasso.with(getApplicationContext()).load(Uri.parse(bgImage)).into(banner);
