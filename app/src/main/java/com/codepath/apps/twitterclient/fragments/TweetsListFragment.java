@@ -19,6 +19,7 @@ import com.codepath.apps.twitterclient.R;
 import com.codepath.apps.twitterclient.activities.ProfileActivity;
 import com.codepath.apps.twitterclient.adapters.TweetsArrayAdapter;
 import com.codepath.apps.twitterclient.helpers.EndlessScrollListener;
+import com.codepath.apps.twitterclient.helpers.TwitterClient;
 import com.codepath.apps.twitterclient.models.Tweet;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public abstract class TweetsListFragment extends Fragment {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 System.out.println("tweet adapter: " + tweetAdapter.getCount());
-                if (tweetAdapter.getCount() > 0) {
+                if (tweetAdapter.getCount() >= TwitterClient.TWEETS_PER_PAGE) {
                     Tweet oldest = tweetAdapter.getItem(tweetAdapter.getCount()-1);
                     populateTimeline(oldest.getId());
                 } else {

@@ -29,9 +29,10 @@ import java.util.Locale;
 public class TwitterClient extends OAuthBaseClient {
 	public static final Class<? extends Api> REST_API_CLASS = TwitterApi.class; // Change this
 	public static final String REST_URL = "https://api.twitter.com/1.1/"; // Change this, base API URL
-	public static final String REST_CONSUMER_KEY = "sE24oFex8GXsnYzuhwksDjV0o";
-	public static final String REST_CONSUMER_SECRET = "3TCPmMRqpCpzbixTkTyXf0jL0aavAv1Ewy1HAWNZYa8JYHUB8Z";
+	public static final String REST_CONSUMER_KEY = "zmfPKqeA3ZUMmh56guMYHw";
+	public static final String REST_CONSUMER_SECRET = "eKDdqCDRqNyBNtDrN49eHlLLOwqdYutWXnPeXaesnc";
 	public static final String REST_CALLBACK_URL = "oauth://codepathtweets";
+    public static final int TWEETS_PER_PAGE = 25;
 
 	public TwitterClient(Context context) {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
@@ -40,7 +41,7 @@ public class TwitterClient extends OAuthBaseClient {
     public void getHomeTimeline(String maxId, AsyncHttpResponseHandler handler) {
         String apiUrl = getApiUrl("statuses/home_timeline.json");
         RequestParams params = new RequestParams();
-        params.put("count", 25);
+        params.put("count", TWEETS_PER_PAGE);
         params.put("max_id", maxId);
         System.out.println(apiUrl.toString() + " " + params.toString());
         client.get(apiUrl, params, handler);
@@ -56,7 +57,7 @@ public class TwitterClient extends OAuthBaseClient {
     public void getMentions(String maxId, AsyncHttpResponseHandler handler) {
         String apiUrl = getApiUrl("statuses/mentions_timeline.json");
         RequestParams params = new RequestParams();
-        params.put("count", 25);
+        params.put("count", TWEETS_PER_PAGE);
         params.put("max_id", maxId);
         params.put("include_rts", 1);
         System.out.println(apiUrl.toString() + " " + params.toString());
@@ -85,7 +86,7 @@ public class TwitterClient extends OAuthBaseClient {
         RequestParams params = new RequestParams();
         params.put("max_id", maxId);
         params.put("screen_name", username);
-        params.put("count", 25);
+        params.put("count", TWEETS_PER_PAGE);
         client.get(apiUrl, params, handler);
     }
 
