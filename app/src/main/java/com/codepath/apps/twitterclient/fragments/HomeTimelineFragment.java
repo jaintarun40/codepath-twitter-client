@@ -17,8 +17,8 @@ public class HomeTimelineFragment extends TweetsListFragment {
 
     private TwitterClient client = TwitterApplication.getRestClient();
 
-    public void populateTimeline(String sinceId) {
-        client.getHomeTimeline(sinceId, new JsonHttpResponseHandler() {
+    public void populateTimeline(String maxId) {
+        client.getHomeTimeline(maxId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 ArrayList<Tweet> tweets = Tweet.fromJson(response);
@@ -31,7 +31,7 @@ public class HomeTimelineFragment extends TweetsListFragment {
                 System.out.println(errorResponse);
                 Toast.makeText(getActivity().getApplicationContext(),
                         "Couldn't get Tweets :(", Toast.LENGTH_SHORT).show();
-                stopRefreshing();
+                swipeContainer.setRefreshing(false);
             }
         });
     }

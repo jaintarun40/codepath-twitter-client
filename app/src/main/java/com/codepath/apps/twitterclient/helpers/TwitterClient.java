@@ -37,11 +37,12 @@ public class TwitterClient extends OAuthBaseClient {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
 	}
 
-    public void getHomeTimeline(String sinceId, AsyncHttpResponseHandler handler) {
+    public void getHomeTimeline(String maxId, AsyncHttpResponseHandler handler) {
         String apiUrl = getApiUrl("statuses/home_timeline.json");
         RequestParams params = new RequestParams();
         params.put("count", 25);
-        params.put("since_id", sinceId);
+        params.put("max_id", maxId);
+        System.out.println(apiUrl.toString() + " " + params.toString());
         client.get(apiUrl, params, handler);
     }
 
@@ -52,13 +53,13 @@ public class TwitterClient extends OAuthBaseClient {
         client.post(apiUrl, params, handler);
     }
 
-    public void getMentions(String sinceId, AsyncHttpResponseHandler handler) {
+    public void getMentions(String maxId, AsyncHttpResponseHandler handler) {
         String apiUrl = getApiUrl("statuses/mentions_timeline.json");
         RequestParams params = new RequestParams();
         params.put("count", 25);
-        params.put("since_id", sinceId);
+        params.put("max_id", maxId);
         params.put("include_rts", 1);
-        System.out.println(params.toString());
+        System.out.println(apiUrl.toString() + " " + params.toString());
         client.get(apiUrl, params, handler);
     }
 
@@ -79,10 +80,10 @@ public class TwitterClient extends OAuthBaseClient {
     }
 
 
-    public void getUserTimeline(String username, String sinceId, AsyncHttpResponseHandler handler) {
+    public void getUserTimeline(String username, String maxId, AsyncHttpResponseHandler handler) {
         String apiUrl = getApiUrl("statuses/user_timeline.json");
         RequestParams params = new RequestParams();
-        params.put("since_id", sinceId);
+        params.put("max_id", maxId);
         params.put("screen_name", username);
         params.put("count", 25);
         client.get(apiUrl, params, handler);

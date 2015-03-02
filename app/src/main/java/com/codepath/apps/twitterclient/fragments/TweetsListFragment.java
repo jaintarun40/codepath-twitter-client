@@ -25,8 +25,9 @@ import java.util.ArrayList;
 
 public abstract class TweetsListFragment extends Fragment {
 
-    private TweetsArrayAdapter tweetAdapter;
-    private SwipeRefreshLayout swipeContainer;
+    TweetsArrayAdapter tweetAdapter;
+    SwipeRefreshLayout swipeContainer;
+    ListView lvTimeline;
 
     public TweetsListFragment() {
         // Required empty public constructor
@@ -42,7 +43,7 @@ public abstract class TweetsListFragment extends Fragment {
         }
     }
 
-    public abstract void populateTimeline(String sinceId);
+    public abstract void populateTimeline(String maxId);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,7 +53,7 @@ public abstract class TweetsListFragment extends Fragment {
 
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
 
-        ListView lvTimeline = (ListView) v.findViewById(R.id.lvTimeline);
+        lvTimeline = (ListView) v.findViewById(R.id.lvTimeline);
         tweetAdapter = new TweetsArrayAdapter(getActivity(), new ArrayList<Tweet>());
 
         lvTimeline.setAdapter(tweetAdapter);
@@ -62,8 +63,8 @@ public abstract class TweetsListFragment extends Fragment {
             public void onLoadMore(int page, int totalItemsCount) {
                 System.out.println("tweet adapter: " + tweetAdapter.getCount());
                 if (tweetAdapter.getCount() > 0) {
-                    Tweet newestTweet = tweetAdapter.getItem(0);
-                    populateTimeline(newestTweet.getId());
+                    Tweet oldest = tweetAdapter.getItem(tweetAdapter.getCount()-1);
+                    populateTimeline(oldest.getId());
                 } else {
                     populateTimeline(null);
                 }
@@ -96,10 +97,6 @@ public abstract class TweetsListFragment extends Fragment {
     protected void addAll(ArrayList<Tweet> tweets) {
         tweetAdapter.addAll(tweets);
         tweetAdapter.notifyDataSetChanged();
-        swipeContainer.setRefreshing(false);
-    }
-
-    protected void stopRefreshing() {
         swipeContainer.setRefreshing(false);
     }
 

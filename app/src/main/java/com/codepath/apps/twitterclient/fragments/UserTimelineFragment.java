@@ -34,9 +34,9 @@ public class UserTimelineFragment extends TweetsListFragment {
         return f;
     }
 
-    public void populateTimeline(String sinceId) {
+    public void populateTimeline(String maxId) {
 
-        client.getUserTimeline(username, sinceId, new JsonHttpResponseHandler() {
+        client.getUserTimeline(username, maxId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 System.out.println(response);
@@ -50,7 +50,7 @@ public class UserTimelineFragment extends TweetsListFragment {
                 System.out.println(errorResponse);
                 Toast.makeText(getActivity().getApplicationContext(),
                         "Couldn't get Tweets :(", Toast.LENGTH_SHORT).show();
-                stopRefreshing();
+                swipeContainer.setRefreshing(false);
             }
         });
     }

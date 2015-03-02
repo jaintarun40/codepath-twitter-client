@@ -17,11 +17,11 @@ public class MentionsTimelineFragment extends TweetsListFragment {
 
     private TwitterClient client = TwitterApplication.getRestClient();
 
-    public void populateTimeline(String sinceId) {
-        client.getMentions(sinceId, new JsonHttpResponseHandler() {
+    public void populateTimeline(String maxId) {
+        client.getMentions(maxId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                System.out.println(response);
+                System.out.println("mentions response: " + response);
                 ArrayList<Tweet> tweets = Tweet.fromJson(response);
                 addAll(tweets);
             }
@@ -32,7 +32,7 @@ public class MentionsTimelineFragment extends TweetsListFragment {
                 System.out.println(errorResponse);
                 Toast.makeText(getActivity().getApplicationContext(),
                         "Couldn't get Tweets :(", Toast.LENGTH_SHORT).show();
-                stopRefreshing();
+                swipeContainer.setRefreshing(false);
             }
         });
     }
