@@ -15,10 +15,13 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.twitterclient.R;
 import com.codepath.apps.twitterclient.fragments.HomeTimelineFragment;
 import com.codepath.apps.twitterclient.fragments.MentionsTimelineFragment;
+import com.codepath.apps.twitterclient.helpers.SmartFragmentStatePagerAdapter;
+import com.codepath.apps.twitterclient.models.Tweet;
 
 public class TimelineActivity extends ActionBarActivity {
 
-//    HomeTimelineFragment homeTimelineFragment;
+    TweetsPagerAdapter pagerAdapter;
+    ViewPager vp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +35,11 @@ public class TimelineActivity extends ActionBarActivity {
         getSupportActionBar().setLogo(R.drawable.ic_logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
-        ViewPager vp = (ViewPager) findViewById(R.id.viewpager);
-        vp.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager()));
+        vp = (ViewPager) findViewById(R.id.viewpager);
+        pagerAdapter = new TweetsPagerAdapter(getSupportFragmentManager());
+        vp.setAdapter(pagerAdapter);
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabStrip.setViewPager(vp);
-
-//        if(savedInstanceState == null) {
-//            homeTimelineFragment = (HomeTimelineFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_tweets);
-//        }
 
     }
 
@@ -75,18 +75,18 @@ public class TimelineActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    @Override
-    // TODO Figure this out
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if(requestCode == ComposeActivity.REQUEST_CODE && resultCode == ComposeActivity.REQUEST_CODE) {
-//            // Append this tweet to the top of the feed
-//            Tweet tweet = (Tweet) data.getParcelableExtra("tweet");
-//            homeTimelineFragment.add(tweet);
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == ComposeActivity.REQUEST_CODE && resultCode == ComposeActivity.REQUEST_CODE) {
+            // Append this tweet to the top of the feed
+            Tweet tweet = (Tweet) data.getParcelableExtra("tweet");
+            HomeTimelineFragment homeTimlineFragment = (HomeTimelineFragment) pagerAdapter.getRegisteredFragment(0);
+            homeTimlineFragment.add(tweet);
+        }
+    }
 
     // Returns order of the fragments in the view pager
-    public class TweetsPagerAdapter extends FragmentPagerAdapter {
+    public class TweetsPagerAdapter extends SmartFragmentStatePagerAdapter {
 
         private String tabTitles[] = { "Home", "@ Mentions" };
 
