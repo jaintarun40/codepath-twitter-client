@@ -33,4 +33,4 @@ Week 4 Completed user stories:
 
 Walkthrough of all week 4 user stories:
 
-![Video walkthrough](http://i.imgur.com/.gif)
+![Video walkthrough](http://i.imgur.com/QmhsyZo.gif)
