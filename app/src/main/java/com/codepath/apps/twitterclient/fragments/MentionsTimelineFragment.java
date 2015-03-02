@@ -1,5 +1,7 @@
 package com.codepath.apps.twitterclient.fragments;
 
+import android.widget.Toast;
+
 import com.codepath.apps.twitterclient.TwitterApplication;
 import com.codepath.apps.twitterclient.helpers.TwitterClient;
 import com.codepath.apps.twitterclient.models.Tweet;
@@ -28,6 +30,8 @@ public class MentionsTimelineFragment extends TweetsListFragment {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 System.out.println("mentions timeline failed");
                 System.out.println(errorResponse);
+                Toast.makeText(getActivity().getApplicationContext(),
+                        "Couldn't get Tweets :(", Toast.LENGTH_SHORT).show();
                 stopRefreshing();
             }
         });

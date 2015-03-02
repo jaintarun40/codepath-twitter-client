@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.codepath.apps.twitterclient.R;
 import com.codepath.apps.twitterclient.adapters.TweetsArrayAdapter;
+import com.codepath.apps.twitterclient.helpers.EndlessScrollListener;
 import com.codepath.apps.twitterclient.models.Tweet;
 
 import java.util.ArrayList;
@@ -53,21 +54,23 @@ public abstract class TweetsListFragment extends Fragment {
 
         lvTimeline.setAdapter(tweetAdapter);
 
-//        lvTimeline.setOnScrollListener(new EndlessScrollListener() {
-//            @Override
-//            public void onLoadMore(int page, int totalItemsCount) {
-//                if(tweetAdapter.getCount() > 0) {
-//                    Tweet newestTweet = tweetAdapter.getItem(0);
-//                    populateTimeline(newestTweet.getId());
-//                } else {
-//                    populateTimeline(null);
-//                }
-//            }
-//        });
+        lvTimeline.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                System.out.println("tweet adapter: " + tweetAdapter.getCount());
+                if(tweetAdapter.getCount() > 0) {
+                    Tweet newestTweet = tweetAdapter.getItem(0);
+                    populateTimeline(newestTweet.getId());
+                } else {
+                    populateTimeline(null);
+                }
+            }
+        });
 
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                tweetAdapter.clear();
                 populateTimeline(null);
             }
         });
