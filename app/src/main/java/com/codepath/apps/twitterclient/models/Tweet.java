@@ -78,41 +78,11 @@ public class Tweet implements Parcelable {
         return tweet;
     }
 
-    public static Tweet fromJson(JSONObject json, User user) {
-        Tweet tweet = new Tweet();
-        try {
-            tweet.id = json.getString("id_str");
-            tweet.body = json.getString("text");
-            tweet.createdAt = json.getString("created_at");
-            tweet.retweetCount = json.getInt("retweet_count");
-            tweet.user = user;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return tweet;
-    }
-
     public static ArrayList<Tweet> fromJson(JSONArray json) {
         ArrayList<Tweet> tweets = new ArrayList<Tweet>(json.length());
         for (int i = 0; i < json.length(); i++) {
             try {
                 Tweet tweet = fromJson(json.getJSONObject(i));
-                if(tweet != null) {
-                    tweets.add(tweet);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-                continue;
-            }
-        }
-        return tweets;
-    }
-
-    public static ArrayList<Tweet> fromJson(JSONArray json, User user) {
-        ArrayList<Tweet> tweets = new ArrayList<Tweet>(json.length());
-        for (int i = 0; i < json.length(); i++) {
-            try {
-                Tweet tweet = fromJson(json.getJSONObject(i), user);
                 if(tweet != null) {
                     tweets.add(tweet);
                 }

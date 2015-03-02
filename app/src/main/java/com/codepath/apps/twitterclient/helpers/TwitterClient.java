@@ -1,18 +1,14 @@
 package com.codepath.apps.twitterclient.helpers;
 
-import org.apache.http.Header;
-import org.json.JSONObject;
-import org.scribe.builder.api.Api;
-import org.scribe.builder.api.TwitterApi;
-
 import android.content.Context;
 import android.text.format.DateUtils;
 
-import com.codepath.apps.twitterclient.models.User;
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
+import org.scribe.builder.api.Api;
+import org.scribe.builder.api.TwitterApi;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -80,7 +76,6 @@ public class TwitterClient extends OAuthBaseClient {
         params.put("since_id", sinceId);
         params.put("screen_name", username);
         params.put("count", 25);
-        params.put("trim_user", 1);
         client.get(apiUrl, params, handler);
     }
 

@@ -31,6 +31,9 @@
             android:layout_toRightOf="@id/tvTweetFullName"
             style="@style/SmallLightText"
             android:text="\@teekirol"
+            android:gravity="center_vertical"
+            android:layout_alignBottom="@id/tvTweetFullName"
+            android:layout_alignTop="@id/tvTweetFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

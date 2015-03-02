@@ -14,10 +14,6 @@ import com.codepath.apps.twitterclient.models.Tweet;
 import com.codepath.apps.twitterclient.models.User;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.List;
 
 public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {

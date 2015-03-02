@@ -1,8 +1,6 @@
 package com.codepath.apps.twitterclient;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import com.codepath.apps.twitterclient.helpers.TwitterClient;
 

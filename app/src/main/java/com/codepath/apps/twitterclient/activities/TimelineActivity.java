@@ -1,9 +1,7 @@
 package com.codepath.apps.twitterclient.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -17,8 +15,6 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.twitterclient.R;
 import com.codepath.apps.twitterclient.fragments.HomeTimelineFragment;
 import com.codepath.apps.twitterclient.fragments.MentionsTimelineFragment;
-import com.codepath.apps.twitterclient.fragments.UserTimelineFragment;
-import com.codepath.apps.twitterclient.models.User;
 
 public class TimelineActivity extends ActionBarActivity {
 

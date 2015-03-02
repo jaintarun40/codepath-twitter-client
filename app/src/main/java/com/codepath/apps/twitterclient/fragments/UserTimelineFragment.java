@@ -1,10 +1,6 @@
 package com.codepath.apps.twitterclient.fragments;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 
 import com.codepath.apps.twitterclient.TwitterApplication;
 import com.codepath.apps.twitterclient.helpers.TwitterClient;
@@ -21,28 +17,29 @@ import java.util.ArrayList;
 public class UserTimelineFragment extends TweetsListFragment {
 
     TwitterClient client = TwitterApplication.getRestClient();
-    User user = new User();
+    String username;
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        username = getArguments().getString("user");
+    }
 
-        super.onActivityCreated(savedInstanceState);
-
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        user.setId(pref.getString("id", null));
-        user.setUserProfileImage(pref.getString("avatarURL", null));
-        user.setUserName(pref.getString("name", null));
-        user.setUserScreenName(pref.getString("username", null));
-
+    public static UserTimelineFragment newInstance(String username) {
+        UserTimelineFragment f = new UserTimelineFragment();
+        Bundle args = new Bundle();
+        args.putString("user", username);
+        f.setArguments(args);
+        return f;
     }
 
     public void populateTimeline(String sinceId) {
 
-        client.getUserTimeline(user.getUserScreenName(), sinceId, new JsonHttpResponseHandler() {
+        client.getUserTimeline(username, sinceId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 System.out.println(response);
-                ArrayList<Tweet> tweets = Tweet.fromJson(response, user);
+                ArrayList<Tweet> tweets = Tweet.fromJson(response);
                 addAll(tweets);
             }
 
