@@ -29,8 +29,8 @@ import java.util.Locale;
 public class TwitterClient extends OAuthBaseClient {
 	public static final Class<? extends Api> REST_API_CLASS = TwitterApi.class; // Change this
 	public static final String REST_URL = "https://api.twitter.com/1.1/"; // Change this, base API URL
-	public static final String REST_CONSUMER_KEY = "zmfPKqeA3ZUMmh56guMYHw";
-	public static final String REST_CONSUMER_SECRET = "eKDdqCDRqNyBNtDrN49eHlLLOwqdYutWXnPeXaesnc";
+	public static final String REST_CONSUMER_KEY = "qaJ75NFwgjrC0hC4BvtzhrSK7";
+	public static final String REST_CONSUMER_SECRET = "EOLyzQWriusrEr1NXYsSos9EwFwyaGHDNEsU4fB9AooWYJHWN3";
 	public static final String REST_CALLBACK_URL = "oauth://codepathtweets";
     public static final int TWEETS_PER_PAGE = 25;
 
