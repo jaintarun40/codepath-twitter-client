@@ -63,11 +63,11 @@ public abstract class TweetsListFragment extends Fragment {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 System.out.println("tweet adapter: " + tweetAdapter.getCount());
-                if (tweetAdapter.getCount() >= TwitterClient.TWEETS_PER_PAGE) {
+                if(tweetAdapter.getCount() == 0) {
+                    populateTimeline(null);
+                } else if (tweetAdapter.getCount() >= TwitterClient.TWEETS_PER_PAGE) {
                     Tweet oldest = tweetAdapter.getItem(tweetAdapter.getCount()-1);
                     populateTimeline(oldest.getId());
-                } else {
-                    populateTimeline(null);
                 }
             }
         });
