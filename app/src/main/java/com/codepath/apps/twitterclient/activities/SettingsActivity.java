@@ -1,5 +1,6 @@
 package com.codepath.apps.twitterclient.activities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,6 +25,8 @@ public class SettingsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 TwitterApplication.getRestClient().clearAccessToken();
+                Intent i = new Intent(SettingsActivity.this, LoginActivity.class);
+                startActivity(i);
             }
         });
     }

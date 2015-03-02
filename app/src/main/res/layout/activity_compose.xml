@@ -11,26 +11,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/tvComposerAvatar"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/ic_launcher"/>
-
-        <TextView
-            android:id="@+id/tvComposerName"
-            android:text="Lori Lee"
-            style="@style/BoldText"
-            android:layout_toRightOf="@id/tvComposerAvatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/tvComposerUsername"
-            android:text="\@teekirol"
-            style="@style/SmallLightText"
-            android:layout_below="@id/tvComposerName"
-            android:layout_toRightOf="@id/tvComposerAvatar"
+            android:src="@drawable/ic_launcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

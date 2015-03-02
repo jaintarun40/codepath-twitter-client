@@ -1,6 +1,7 @@
 package com.codepath.apps.twitterclient.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -10,10 +11,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.codepath.apps.twitterclient.R;
+import com.codepath.apps.twitterclient.activities.ProfileActivity;
 import com.codepath.apps.twitterclient.adapters.TweetsArrayAdapter;
 import com.codepath.apps.twitterclient.helpers.EndlessScrollListener;
 import com.codepath.apps.twitterclient.models.Tweet;
@@ -58,7 +61,7 @@ public abstract class TweetsListFragment extends Fragment {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 System.out.println("tweet adapter: " + tweetAdapter.getCount());
-                if(tweetAdapter.getCount() > 0) {
+                if (tweetAdapter.getCount() > 0) {
                     Tweet newestTweet = tweetAdapter.getItem(0);
                     populateTimeline(newestTweet.getId());
                 } else {
@@ -71,6 +74,7 @@ public abstract class TweetsListFragment extends Fragment {
             @Override
             public void onRefresh() {
                 tweetAdapter.clear();
+                tweetAdapter.notifyDataSetChanged();
                 populateTimeline(null);
             }
         });

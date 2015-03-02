@@ -1,6 +1,7 @@
 package com.codepath.apps.twitterclient.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.apps.twitterclient.R;
+import com.codepath.apps.twitterclient.activities.ProfileActivity;
+import com.codepath.apps.twitterclient.activities.TimelineActivity;
+import com.codepath.apps.twitterclient.fragments.HomeTimelineFragment;
 import com.codepath.apps.twitterclient.models.Tweet;
 import com.codepath.apps.twitterclient.models.User;
 import com.squareup.picasso.Picasso;
@@ -49,6 +53,16 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         Picasso.with(getContext()).load(Uri.parse(user.getUserProfileImage())).into(viewHolder.ivAvatar);
         viewHolder.tvTweetFullName.setText(user.getUserName().toString());
         viewHolder.tvTweetUsername.setText("@" + user.getUserScreenName().toString());
+
+        viewHolder.ivAvatar.setTag(user.getUserScreenName().toString());
+        viewHolder.ivAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), ProfileActivity.class);
+                i.putExtra("username", v.getTag().toString());
+                getContext().startActivity(i);
+            }
+        });
 
         return convertView;
 

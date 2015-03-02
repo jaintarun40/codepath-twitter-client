@@ -44,8 +44,10 @@ public class ProfileActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+        String username = getIntent().getStringExtra("username");
+
         if (savedInstanceState == null) {
-            UserTimelineFragment userTimeline = UserTimelineFragment.newInstance(null);
+            UserTimelineFragment userTimeline = UserTimelineFragment.newInstance(username);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.profileFragment, userTimeline);
             transaction.commit();
@@ -62,45 +64,51 @@ public class ProfileActivity extends ActionBarActivity {
         followerCount = (TextView) findViewById(R.id.tvProfileFollowerCount);
         followingCount = (TextView) findViewById(R.id.tvProfileFollowingCount);
 
-        populateCredentials();
+        populateCredentials(username);
 
     }
 
-    private void populateCredentials() {
-        client.getCredentials(new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
+    private void populateCredentials(String username) {
+        if(username != null) {
+            client.getUser(username, handler);
+        } else {
+            client.getCredentials(handler);
+        }
+    }
 
-                    int followers = response.getInt("followers_count");
-                    int friends = response.getInt("friends_count");
-                    int statuses = response.getInt("statuses_count");
+    private JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            try {
 
-                    String fullname = response.getString("name");
-                    String screenName = response.getString("screen_name");
+                int followers = response.getInt("followers_count");
+                int friends = response.getInt("friends_count");
+                int statuses = response.getInt("statuses_count");
 
-                    String profileImage = response.getString("profile_image_url");
-                    String bgImage = response.optString("profile_background_image_url");
+                String fullname = response.getString("name");
+                String screenName = response.getString("screen_name");
 
-                    followerCount.setText(String.valueOf(followers) + "\nFOLLOWERS");
-                    followingCount.setText(String.valueOf(friends) + "\nFOLLOWING");
-                    tweetCount.setText(String.valueOf(statuses) + "\nTWEETS");
+                String profileImage = response.getString("profile_image_url");
+                String bgImage = response.optString("profile_background_image_url");
 
-                    name.setText(fullname);
-                    userName.setText("@" + screenName);
+                followerCount.setText(String.valueOf(followers) + "\nFOLLOWERS");
+                followingCount.setText(String.valueOf(friends) + "\nFOLLOWING");
+                tweetCount.setText(String.valueOf(statuses) + "\nTWEETS");
 
-                    Picasso.with(getApplicationContext()).load(Uri.parse(profileImage)).into(avatar);
-                    Picasso.with(getApplicationContext()).load(Uri.parse(bgImage)).into(banner);
+                name.setText(fullname);
+                userName.setText("@" + screenName);
 
-                    getSupportActionBar().setTitle("@" + screenName);
+                Picasso.with(getApplicationContext()).load(Uri.parse(profileImage)).into(avatar);
+                Picasso.with(getApplicationContext()).load(Uri.parse(bgImage)).into(banner);
+
+                getSupportActionBar().setTitle("@" + screenName);
 
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });
-    }
+        }
+    };
 
 
     @Override
