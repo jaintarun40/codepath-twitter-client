@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="codepath-utils">
+  <library name="__local_jars__:/home/tarun/StudioProjects/codepath-twitter-client/app/libs/codepath-utils.jar:unspecified@jar">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/app/libs/codepath-utils.jar!/" />
     </CLASSES>

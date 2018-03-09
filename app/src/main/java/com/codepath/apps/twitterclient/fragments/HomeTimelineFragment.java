@@ -30,7 +30,7 @@ public class HomeTimelineFragment extends TweetsListFragment {
                 System.out.println("Home timeline failed");
                 System.out.println(errorResponse);
                 Toast.makeText(getActivity().getApplicationContext(),
-                        "Couldn't get Tweets :(", Toast.LENGTH_SHORT).show();
+                        "API limit exceeded. Try later", Toast.LENGTH_SHORT).show();
                 swipeContainer.setRefreshing(false);
             }
         });

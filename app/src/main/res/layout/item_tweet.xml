@@ -39,13 +39,20 @@
 
         <TextView
             android:id="@+id/tvTweetAge"
-            android:layout_toRightOf="@id/tvTweetUsername"
+            android:layout_toLeftOf="@+id/credibility_icon"
             style="@style/SmallLightText"
+            android:textStyle="bold"
             android:text="15m"
-            android:layout_alignParentRight="true"
-            android:gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/credibility_icon"
+            android:gravity="right"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="5dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/ic_action_cred"/>
 
         <TextView
             android:id="@+id/tvTweetBody"

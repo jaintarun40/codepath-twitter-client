@@ -19,6 +19,7 @@ import com.codepath.apps.twitterclient.models.User;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Random;
 
 public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
 
@@ -29,6 +30,11 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
+        Random r = new Random();
+        int trust = r.nextInt(6) + 4;
+
+        int score = 0;
+
         if(convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater layoutInflater = LayoutInflater.from(getContext());
@@ -44,12 +50,24 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+
         Tweet tweet = getItem(position);
-        viewHolder.tvTweetAge.setText(tweet.getCreatedAt());
+
+        if(tweet.getRetweetCount() > 500) {
+            score += 5;
+        }
+
+        if((tweet.getBody()).length() > 80) {
+            score += 2;
+        }
+
+
+        viewHolder.tvTweetAge.setText(Integer.toString((score/7)*10));
         viewHolder.tvTweetBody.setText(tweet.getBody());
         viewHolder.tvRetweets.setText(String.valueOf(tweet.getRetweetCount()));
 
         User user = tweet.getUser();
+
         Picasso.with(getContext()).load(Uri.parse(user.getUserProfileImage())).into(viewHolder.ivAvatar);
         viewHolder.tvTweetFullName.setText(user.getUserName().toString());
         viewHolder.tvTweetUsername.setText("@" + user.getUserScreenName().toString());
